@@ -113,6 +113,8 @@ int		nbn(char *str, int pos_end_line)
 			pos_end_line = i;
 		i++;
 	}
+	if (nb == 0)
+		pos_end_line = i;
 	return (nb);
 }
 
@@ -120,9 +122,10 @@ int		fill_charline(char **tab, char *str, int n_read, int pos_end_line)
 {
 	int		i;
 
+	i = 0;
 	if (n_read == 0)
 		i = pos_end_line;
-
+	if (!(tab = malloc(pos_end_line)
 }
 
 int		get_next_line(int fd, char **line)
