@@ -98,31 +98,54 @@ int		fill_the_line(char **tab, char *str)
 	return (1);
 }
 
+int		nbn(char *str, int pos_end_line)
+{
+	int		i;
+	int		nb;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			nb++;
+		if (nb == 1)
+			pos_end_line = i;
+		i++;
+	}
+	return (nb);
+}
+
+int		fill_charline(char **tab, char *str, int n_read, int pos_end_line)
+{
+	int		i;
+
+	if (n_read == 0)
+		i = pos_end_line;
+
+}
+
 int		get_next_line(int fd, char **line)
 {
-	int				i;
-	int				endofline;
+	static int		pos_end_line;
+	int				n_read;
 	char			buf[BUFFER_SIZE + 1];
 	int				size;
 
-	i = 0;
+	pos_end_line = 0;
 	size = 0;
+	n_read = 0;
 	while (n_read == 0)
 	{
-																				if (i != 0) {printf("endofline = %d\n", endofline);}
 		if ((size = read(fd, buf, BUFFER_SIZE) < 0))
 			return (-1);
-																				printf("size = %d\n", size);
-		i++;
-		n_read = fill_the_line(line, buf)
-																				printf("i = %d\n", i);
-																				printf("buf = %s\n", buf);
-																				printf("fd = %d\n", fd);
+		n_read = nbn(buf, pos_end_line);
+		fill_charline(line, buf, n_read, pos_end_line);
 	}
 	if (size < BUFFER_SIZE)
 		return (0);
 
-	if (endofline == 0)
+	if (n_read != 0)
 		return (1);
 	else
 		return (-1);
