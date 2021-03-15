@@ -2,21 +2,17 @@
 
 int		main()
 {
-	int		i;
+	int		gnl;
 	int		fd;
 	char	**line = NULL;
 
 	fd = open("alph", O_RDONLY);
-	i = 0;
 
-	while ((printf("GNL = %d\n", get_next_line(fd, line)) > 0))
+	while ((gnl = get_next_line(fd, line)))
 	{
-		while (line[i])
-		{
-			printf("|%s|\n", line[i]);
-			i++;
-		}
-
+		printf("GNL return is %d\n", gnl);
+		free(*line);
 	}
+	printf("|%s|\n", *line);
 	close(fd);
 }
