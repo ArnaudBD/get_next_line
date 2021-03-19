@@ -5,15 +5,15 @@ int		n_search(char *str)
 	int i;
 
 	if (str == NULL)
-		return (0);
+		return (-1);
 	i = 0;
 	
-	while (str[i] != '\n' && str[i] != 0)
-	{
-		write(1, "OK\n", 3);
+	while (str[i] != '\n' && str[i] != 0 && i <= BUFFER_SIZE)
 		i++;
-	}
-	return (i);
+	if (str[i] == '\n')
+		return (i);
+	else
+		return (-1);
 }
 
 char	*fill_the_line(char **line, char *str)
@@ -23,58 +23,40 @@ char	*fill_the_line(char **line, char *str)
 	i = 0;
 	while (str[i] != '\n')
 	{
-		*line[i] = str[i];
+		line[0][i] = str[i];
 		i++;
 	}
-	*line[i] = 0;
+	line[0][i] = 0;
 	return (str = str + i + 1);
-}
-
-int		ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str + i)
-		i++;
-	return (i);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*str = NULL;
+	static char	*str;
+	char		*buf;
 	int			i;
 	int			nb;
+	int			len;
 
 	i = n_search(str);
-
-
-
-//-----------------------------------------------------------------------------
-	char	c;
-	c = i + '0';
-		write(1, &c, 1);
-		write(1, "\n", 1);
-//-----------------------------------------------------------------------------
-
-
-
-	while (i == 0)
+	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+			return (-1);
+	while (i == -1)
 	{
-		if (!(str = malloc(sizeof(char) * (ft_strlen(str) + BUFFER_SIZE))))
+		if ((nb = read(fd, buf, BUFFER_SIZE)) == 0 || nb < BUFFER_SIZE)
 			return (-1);
-		if ((nb = read(fd, str, BUFFER_SIZE)) == 0 || nb < BUFFER_SIZE)
+		buf[BUFFER_SIZE] = 0;
+		len = ft_strlen(str) + nb;
+		if (!(str = malloc(sizeof(char) * (len))))
 			return (-1);
-																				printf("str = %s", str);
+		str = ft_strjoin(str, buf);
 		i = n_search(str);
 	}
-	if (!(*line = malloc(sizeof(char) *(i + 1))))
+	if (!(line[0] = malloc(sizeof(char) * (i + 1))))
 		return (-1);
 	str = fill_the_line(line, str);
-	if (nb < BUFFER_SIZE)
+	if (nb < BUFFER_SIZE && i == ?)
 		return (0);
 	else
 		return (1);
 }
-
-

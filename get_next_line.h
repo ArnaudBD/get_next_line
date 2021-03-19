@@ -10,5 +10,7 @@
 int		get_next_line(int fd, char **line);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putstr_fd(char *s, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strlen(char const *str);
 
 #endif
