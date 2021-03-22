@@ -14,6 +14,7 @@ int		main()
 		printf("|%s|\n", line[0]);
 		free(line[0]);
 	}
+	printf("|GNL return is %d|\n", gnl);
 	printf("|%s|\n", line[0]);
 	close(fd);
 }
