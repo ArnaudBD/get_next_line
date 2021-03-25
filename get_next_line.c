@@ -4,10 +4,9 @@ int		n_search(char *str, int len)
 {
 	int i;
 
-	if (str == NULL || str[0] == 0)
+	if (str == NULL)
 		return (-1);
 	i = 0;
-	
 	while (str[i] != '\n' && str[i] != 0 && i < len)
 		i++;
 	if (str[i] == '\n')
@@ -21,11 +20,13 @@ char	*fill_the_line(char **line, char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\n')
+	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
 	{
 		line[0][i] = str[i];
 		i++;
 	}
+	if (str[i] == EOF)
+		line[0][i + 1] = EOF;
 	line[0][i] = 0;
 	return (str = str + i + 1);
 }
@@ -48,10 +49,15 @@ int		get_next_line(int fd, char **line)
 		if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
 			return (-1);
 		if ((nb = read(fd, buf, BUFFER_SIZE)) == 0)
+		{
+			if (!(line[0] = malloc(sizeof(char) * (i + 1))))
+			return (-1);
+			str = fill_the_line(line, str);
 			return (0);
+		}
 		buf[nb] = '\0';
 		len = ft_strlen(str) + nb;
-		if (!(temp = malloc(sizeof(char) * ft_strlen(str))))
+		if (!(temp = malloc(sizeof(char) * (len - nb))))
 			return (-1);
 		if (str != NULL)
 			while (str[j])
@@ -60,6 +66,7 @@ int		get_next_line(int fd, char **line)
 				j++;
 			}
 		temp[j] = 0;
+		j = 0;
 		if (!(str = malloc(sizeof(char) * (len))))
 			return (-1);
 		str = ft_strjoin(temp, buf);
@@ -69,7 +76,7 @@ int		get_next_line(int fd, char **line)
 	if (!(line[0] = malloc(sizeof(char) * (i + 1))))
 		return (-1);
 	str = fill_the_line(line, str);
-	if (nb < BUFFER_SIZE && i == nb - 1)
+	if ((nb < BUFFER_SIZE && i == nb - 1) || (line[0][ft_strlen(str)] == EOF))
 		return (0);
 	else
 		return (1);
