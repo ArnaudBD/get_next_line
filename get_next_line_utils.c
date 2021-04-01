@@ -6,7 +6,7 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/03/22 16:35:28 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/03/31 12:12:40 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int             ft_strlen(const char *s)
 {
 	int     i;
 
-	if (s == NULL)
+	if (s == NULL || *s == 0)
 		return (0);
 	i = 0;
 	while (s[i] != 0)
@@ -97,7 +97,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	len = ft_strlen(s1) + ft_strlen(s2);
 	if (!(string = malloc(sizeof(char) * len + 1)))
 		return (NULL);
-/*	if (s1[i] == '\0')
+	if (!*s1)
 	{
 		while (s2[i])
 		{
@@ -107,7 +107,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 		string[i] = 0;
 		return (string);
 	}
-	if (s2[i] == '\0')
+	if (!*s2)
 	{
 		while (s1[i])
 		{
@@ -116,7 +116,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 		}
 		string[i] = 0;
 		return (string);
-	}*/
+	}
 	while (i < ft_strlen(s1))
 	{
 		string[i] = s1[i];
@@ -132,4 +132,36 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	return (string);
 }
 
+char	*mv_next_line(char **line, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
+	{
+		line[0][i] = str[i];
+		i++;
+	}
+	if (str[i] == EOF)
+		line[0][i + 1] = EOF;
+	line[0][i] = 0;
+	return (str = str + i + 1);
+}
+
+int		n_search(char *str, int len)
+{
+	int i;
+
+	if (str == NULL)
+		return (-1);
+	i = 0;
+	while (str[i] != '\n' && str[i] != 0 && i < len)
+		i++;
+	if (str[i] == '\n')
+		return (i);
+	else
+		return (-1);
+}
 

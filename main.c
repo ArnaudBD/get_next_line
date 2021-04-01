@@ -6,7 +6,8 @@ int		main()
 	int		fd;
 	char	*line[] = {""};
 
-	fd = open("alph", O_RDONLY);
+	fd = open("Nimon77/42cursus_gnl_tests/tests/normal/1.txt", O_RDONLY);
+
 
 	while ((gnl = get_next_line(fd, line)) == 1)
 	{
