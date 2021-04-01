@@ -6,7 +6,7 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/03/31 12:12:40 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:18:41 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	*mv_next_line(char **line, char *str)
 	return (str = str + i + 1);
 }
 
-int		n_search(char *str, int len)
+int		n_search(char *str, int len/*, int nb*/)
 {
 	int i;
 
@@ -159,7 +159,7 @@ int		n_search(char *str, int len)
 	i = 0;
 	while (str[i] != '\n' && str[i] != 0 && i < len)
 		i++;
-	if (str[i] == '\n')
+	if (str[i] == '\n'/* || nb < BUFFER_SIZE*/)
 		return (i);
 	else
 		return (-1);
