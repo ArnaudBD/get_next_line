@@ -6,7 +6,7 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/04/07 11:45:43 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/04/08 17:14:20 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,8 @@ int		mv_first_line(char *str, char **dest)
 	i = 0;
 	if (str == NULL)
 	{
-	if (!(dest[0] = malloc(sizeof(char) * i + 1)))
-		return (-1);
-		dest[0] = "";
+		dest[0] = malloc(1);
+		dest[0][0] = 0;
 		return (0);
 	}
 	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
@@ -226,7 +225,7 @@ char	*cut_first_line(char *str)
 	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
 		i++;
 	
-	if(!(new_str = malloc(sizeof(char) * (ft_strlen(str) - i + 1))))
+	if(!(new_str = malloc(sizeof(char) * (ft_strlen(str) - i))))
 		return (0);
 	new_str = str + i + 1;
 //	if (!!str)

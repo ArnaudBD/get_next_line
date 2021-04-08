@@ -13,7 +13,11 @@ int		get_next_line(int fd, char **line)
 		if ((bytes_read = read(fd, buf, BUFFER_SIZE)) <= 0)
 		{
 			if (bytes_read == -1)
+			{
+				line[0] = malloc(1);
+				line[0] = 0;
 				return (-1);
+			}
 			break;
 		}
 		else

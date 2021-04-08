@@ -6,10 +6,9 @@ int		main()
 	int		fd;
 	char	*line[] = {"truc"};
 	int		i;
-
 	i = 1;
 
-/*	fd = open("Nimon77/42cursus_gnl_tests/tests/normal/1.txt", O_RDONLY);
+	fd = open("Nimon77/GNL_lover/Makefile", O_RDONLY);
 
 
 	while ((gnl = get_next_line(fd, line)) == 1)
@@ -23,7 +22,7 @@ int		main()
 	printf("|%s|\n", line[0]);
 	free(line[0]);
 	close(fd);
-*/	fd = open("/dev/null", O_RDONLY);
+	fd = open("/dev/null", O_RDONLY);
 	while ((gnl = get_next_line(fd, line)) == 1)
 	{
 		i++;
