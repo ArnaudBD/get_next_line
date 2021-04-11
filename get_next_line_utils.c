@@ -6,7 +6,7 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/04/08 17:14:20 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/04/11 16:32:59 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,13 +224,44 @@ char	*cut_first_line(char *str)
 		return (0);
 	while (str[i] != '\n' && str[i] != 0 && str[i] != EOF)
 		i++;
-	
-	if(!(new_str = malloc(sizeof(char) * (ft_strlen(str) - i))))
+
+	if(!(new_str = malloc(ft_strlen(str) - i)))
 		return (0);
 	new_str = str + i + 1;
-//	if (!!str)
-//		free(str);
+	//	if (str)
+	//		free(str);
 	return (new_str);
-	
-//	return (str + i + 1);
+
+	//	return (str + i + 1);
+}
+
+char	*sup_first_line(char *str)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*new_str = NULL;
+
+	i = 0;
+	j = 0;
+	if (str == NULL || *str == 0 || *str == EOF)
+		return (0);
+	while (str[i] != '\n' && str[i] != 0)
+		i++;
+	if ((len = ft_strlen(str) - i - 1) >= 0)
+	{
+		if (!(new_str = malloc(sizeof(*new_str) * len + 1)))
+			return (0);
+		//	new_str[ft_strlen(str) - i] = 0;
+		i++;
+		while (j < len)
+		{
+			new_str[j] = str[i];
+			i++;
+			j++;
+		}
+		new_str[j] = 0;
+	}
+	free(str);
+	return (new_str);
 }

@@ -19,5 +19,6 @@ int		ft_strlen(char const *str);
 char	*first_line(char *str);
 char	*cut_first_line(char *str);
 int		mv_first_line(char *str, char **dest);
+char	*sup_first_line(char *str);
 
 #endif
