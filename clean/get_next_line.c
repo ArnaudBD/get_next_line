@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abiju-du <abiju-du@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/13 15:38:30 by abiju-du          #+#    #+#             */
+/*   Updated: 2021/04/13 15:47:22 by abiju-du         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-int             ft_strlen(const char *s)
+
+int		ft_strlen(const char *s)
 {
-	int     i;
+	int			i;
 
 	if (s == NULL || *s == 0)
 		return (0);
@@ -13,8 +26,8 @@ int             ft_strlen(const char *s)
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char *dst_cpy;
-	char *src_cpy;
+	char		*dst_cpy;
+	char		*src_cpy;
 
 	dst_cpy = (char *)dst;
 	src_cpy = (char *)src;
@@ -36,10 +49,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*str_join;
-	size_t	s1_len;
-	size_t	s2_len;
-	size_t	s_len;
+	char		*str_join;
+	size_t		s1_len;
+	size_t		s2_len;
+	size_t		s_len;
 
 	if (s1 == NULL && s2 == NULL)
 		return (0);
@@ -57,7 +70,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 char	*mv_next_line(char **line, char *str)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	if (!str)
@@ -79,7 +92,7 @@ int		get_next_line(int fd, char **line)
 	char		buf[BUFFER_SIZE + 1];
 	int			bytes_read;
 
-	if ((bytes_read = BUFFER_SIZE) < 1 || !line || fd < 0 
+	if ((bytes_read = BUFFER_SIZE) < 1 || !line || fd < 0
 			|| read(fd, buf, 0) != 0)
 		return (-1);
 	while (n_search(str) == -1 && bytes_read != 0)
@@ -98,9 +111,6 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	str = sup_first_line(str);
 	if (bytes_read <= 0)
-	{
-		str = NULL;
 		return (bytes_read);
-	}
 	return (1);
 }

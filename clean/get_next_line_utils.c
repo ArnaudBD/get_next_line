@@ -6,7 +6,7 @@
 /*   By: abiju-du <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 08:26:58 by abiju-du          #+#    #+#             */
-/*   Updated: 2021/04/13 11:58:37 by abiju-du         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:40:24 by abiju-du         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ int		mv_first_line(char *str, char **dest)
 	}
 	return (1);
 }
+
 char	*sup_first_line(char *str)
 {
 	int		i;
 	int		j;
 	int		len;
-	char	*new_str = NULL;
+	char	*new_str;
 
 	i = 0;
 	j = 0;
+	new_str = NULL;
 	while (str[i] != '\n' && str[i] != 0)
 		i++;
 	if ((len = ft_strlen(str) - i - 1) >= 0)
